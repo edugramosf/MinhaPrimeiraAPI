@@ -8,4 +8,14 @@ app.MapGet("/AddHeader", (HttpResponse response) => {
     return new { Name = "Peter Parker", Age = 35 };
     });
 
+app.MapPost("/saveproduct", (Product product) =>
+{
+    return product.Code + " - " + product.Name;
+});
+
 app.Run();
+
+public class Product
+{
+    public string Code { get; set; }  public string Name { get; set; }
+}
