@@ -12,7 +12,7 @@ app.MapPost("/products", (Product product) =>
 app.MapGet("/products/{code}", ([FromRoute] string code) =>
 {
     var product = ProductRepository.GetBy(code);
-     if(product != null) { return Results.Ok(product); }
+      if(product != null) { return Results.Ok(product); }
 
     return Results.NotFound();
 });
@@ -30,6 +30,12 @@ app.MapDelete("/products/{code}", ([FromRoute] string code) =>
     ProductRepository.Remove(productSaved);
     return Results.Ok();
 });
+
+app.MapGet("/configuration/database", (IConfiguration configuration) =>
+{
+    return Results.Ok($"{configuration["database:connection"]}/{configuration["database:port"]}");
+});
+
 
 app.Run();
 
